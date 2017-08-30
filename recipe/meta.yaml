@@ -1,6 +1,6 @@
 {% set name = "libuv" %}
-{% set version = "1.11.0" %}
-{% set sha256 = "6ec7eec6ecc24b1a8ffedebedb2fe9313fffb5410de89aaf784dd01080411c7a" %}
+{% set version = "1.14.0" %}
+{% set sha256 = "96088804334a70f84d64f45e4db926fc1dfa42d4a9d22b1812cf47bc0d9b6947" %}
 
 package:
   name: {{ name|lower }}
@@ -13,24 +13,25 @@ source:
 
 build:
   number: 0
-  skip: true  # [win or not py36]
+  skip: True  # [win or not py36]
 
 requirements:
   build:
-    - python
-    - automake  # [unix]
-    - autoconf  # [unix]
-    - libtool   # [unix]
+    - {{ compiler('c') }}
+    - python 3.6.*         # [win]
+    - automake             # [unix]
+    - autoconf             # [unix]
+    - libtool              # [unix]
 
 test:
   commands:
     - test -f "$PREFIX/include/uv.h"
-    - test -f "$PREFIX/lib/libuv.a"  # [unix]
-    - test -f "$PREFIX/lib/libuv.la"  # [unix]
-    - test -f "$PREFIX/lib/libuv.so.1"  # [linux]
+    - test -f "$PREFIX/lib/libuv.a"        # [unix]
+    - test -f "$PREFIX/lib/libuv.la"       # [unix]
+    - test -f "$PREFIX/lib/libuv.so.1"     # [linux]
     - test -f "$PREFIX/lib/libuv.1.dylib"  # [osx]
-    - test -f "$PREFIX/lib/libuv.so"  # [linux]
-    - test -f "$PREFIX/lib/libuv.dylib"  # [osx]
+    - test -f "$PREFIX/lib/libuv.so"       # [linux]
+    - test -f "$PREFIX/lib/libuv.dylib"    # [osx]
 
 about:
   home: http://libuv.org/
@@ -43,8 +44,10 @@ about:
     It was primarily developed for use by Node.js, but it's also used by Luvit,
     Julia, pyuv, and others.
   doc_url: http://docs.libuv.org/
+  doc_source_url: https://github.com/libuv/libuv/tree/v1.x/docs
   dev_url: https://github.com/libuv/libuv
 
 extra:
   recipe-maintainers:
     - frol
+    - mingwandroid
