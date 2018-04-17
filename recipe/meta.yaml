@@ -22,6 +22,7 @@ requirements:
     - automake             # [unix]
     - autoconf             # [unix]
     - libtool              # [unix]
+    - make                 # [unix]
 
 test:
   commands:
