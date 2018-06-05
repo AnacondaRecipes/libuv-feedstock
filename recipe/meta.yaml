@@ -10,6 +10,9 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/{{ name }}/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # the tty test fails because of the build machine setup, skip it
+    - disable_tty_test.patch  # [ppc64le]
 
 build:
   number: 0
