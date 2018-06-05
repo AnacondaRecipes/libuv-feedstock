@@ -7,6 +7,9 @@ package:
 source:
   url: https://github.com/libuv/libuv/archive/v{{ version }}.tar.gz
   sha256: 30af979c4f4b8d1b895ae6d115f7400c751542ccb9e656350fc89fda08d4eabd
+  patches:
+    # the tty test fails because of the build machine setup, skip it
+    - disable_tty_test.patch  # [ppc64le]
 
 build:
   number: 1000
