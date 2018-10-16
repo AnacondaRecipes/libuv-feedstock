@@ -42,6 +42,7 @@ about:
     It was primarily developed for use by Node.js, but it's also used by Luvit,
     Julia, pyuv, and others.
   doc_url: http://docs.libuv.org/
+  doc_source_url: https://github.com/libuv/libuv/tree/v1.x/docs
   dev_url: https://github.com/libuv/libuv
 
 extra:
