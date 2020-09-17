@@ -1,4 +1,4 @@
-{% set version = "1.26.0" %}
+{% set version = "1.39.0" %}
 
 package:
   name: libuv
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/libuv/libuv/archive/v{{ version }}.tar.gz
-  sha256: e414cf74615b7dae768f0f5667092f1d4975f5067c087bcbe0641e241ebe4693
+  sha256: dc7b21f1bb7ef19f4b42c5ea058afabe51132d165da18812b70fb319659ba629
   patches:
     # the tty test fails because of the build machine setup, skip it
     - disable_tty_test.patch  # [ppc64le]
