@@ -1,0 +1,35 @@
+From e28574843d26e77f91737ea9085fdc4bee73931a Mon Sep 17 00:00:00 2001
+From: Ray Donnelly <mingw.android@gmail.com>
+Date: Fri, 18 Sep 2020 11:52:32 +0200
+Subject: [PATCH] Skip the single bit that fails in test-fs-copyfile when root
+
+Best to test as much of it as we can.
+---
+ test/test-fs-copyfile.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/test/test-fs-copyfile.c b/test/test-fs-copyfile.c
+index e6f06e6e..58156c9d 100644
+--- a/test/test-fs-copyfile.c
++++ b/test/test-fs-copyfile.c
+@@ -199,6 +199,9 @@ TEST_IMPL(fs_copyfile) {
+     handle_result(&req);
+ 
+ #ifndef _WIN32
++  /* This test fails on concourse CI on all platforms. Need to investigate if
++     non-root is possible really. Goto so diff is minimal. Sorry! */
++  if (0 == geteuid()) goto i_am_root;
+   /* Copying respects permissions/mode. */
+   unlink(dst);
+   touch_file(dst, 0);
+@@ -211,6 +214,7 @@ TEST_IMPL(fs_copyfile) {
+ # endif
+   uv_fs_req_cleanup(&req);
+ #endif
++i_am_root:
+ 
+   unlink(dst); /* Cleanup */
+   return 0;
+-- 
+2.23.0
+
