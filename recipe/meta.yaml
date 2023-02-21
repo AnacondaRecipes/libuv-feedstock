@@ -1,4 +1,4 @@
-{% set version = "1.40.0" %}
+{% set version = "1.44.2" %}
 
 package:
   name: libuv
@@ -7,11 +7,12 @@ package:
 source:
   fn: libuv-v{{ version }}.tar.gz
   url: https://github.com/libuv/libuv/archive/v{{ version }}.tar.gz
-  sha256: 70fe1c9ba4f2c509e8166c0ca2351000237da573bb6c82092339207a9715ba6b
+  sha256: e6e2ba8b4c349a4182a33370bb9be5e23c51b32efb9b9e209d0e8556b73a48da
   patches:
     # the tty test fails because of the build machine setup, skip it
     - disable_tty_test.patch  # [ppc64le]
     - 0001-Skip-the-single-bit-that-fails-in-test-fs-copyfile-w.patch
+    - fsevent_loose_timeout.patch
 
 build:
   number: 0
@@ -25,20 +26,28 @@ requirements:
     - autoconf             # [unix]
     - libtool              # [unix]
     - make                 # [unix]
-    - m2-patch  # [win]
-    - patch     # [not win]
+    - sed                  # [unix]
+    - m2-patch             # [win]
+    - patch                # [not win]
+    - cmake-no-system      # [win]
 
 test:
   commands:
-    - test -f "%PREFIX%/Library/include/uv.h"  # [win]
-    - test -f "$PREFIX/include/uv.h"  # [unix]
-    - test -f "$PREFIX/lib/libuv.a"  # [unix]
+    - test -f "$PREFIX/include/uv.h"    # [unix]
+    - test -f "$PREFIX/lib/libuv.a"     # [unix]
     - test -f "$PREFIX/lib/libuv.so.1"  # [linux]
     - test -f "$PREFIX/lib/libuv.1.dylib"  # [osx]
     - test -f "$PREFIX/lib/libuv${SHLIB_EXT}"  # [not win]
+    - test -f "$PREFIX/lib/pkgconfig/libuv.pc"  # [not win]
+    - if not exist %LIBRARY_INC%\uv.h (exit 1)      # [win]
+    - if not exist %LIBRARY_LIB%\uv.lib (exit 1)    # [win]
+    - if not exist %LIBRARY_BIN%\uv.dll (exit 1)    # [win]
+    - if not exist %LIBRARY_LIB%\uv_a.lib (exit 1)  # [win]
+    - if not exist %LIBRARY_LIB%\pkgconfig/libuv-static.pc (exit 1)  # [win]
+    - if not exist %LIBRARY_LIB%\pkgconfig/libuv.pc (exit 1)         # [win]
 
 about:
-  home: http://libuv.org/
+  home: https://libuv.org/
   license: MIT
   license_family: MIT
   license_file: LICENSE
@@ -47,8 +56,7 @@ about:
     libuv is a multi-platform support library with a focus on asynchronous I/O.
     It was primarily developed for use by Node.js, but it's also used by Luvit,
     Julia, pyuv, and others.
-  doc_url: http://docs.libuv.org/
-  doc_source_url: https://github.com/libuv/libuv/tree/v1.x/docs
+  doc_url: https://docs.libuv.org/
   dev_url: https://github.com/libuv/libuv
 
 extra:
