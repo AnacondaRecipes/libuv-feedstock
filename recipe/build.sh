@@ -4,7 +4,9 @@ sed -i '/udp_multicast_join6/d' ./test/test-list.h
 
 # This particular test intermittently fails on osx
 if [ "${target_platform}" == 'osx-64' ]; then
+   # see https://github.com/libuv/libuv/issues/3862
    sed -i '/fs_event_error_reporting/d' ./test/test-list.h
+   sed -i '/fs_event_watch_dir_recursive/d' ./test/test-list.h
 fi
 
 # LIBTOOLIZE setting is required to workaround missing glibtoolize on OS X:
