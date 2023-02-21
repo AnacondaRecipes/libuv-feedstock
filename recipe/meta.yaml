@@ -26,9 +26,9 @@ requirements:
     - libtool              # [unix]
     - make                 # [unix]
     - sed                  # [unix]
-    - m2-patch  # [win]
-    - patch     # [not win]
-    - cmake     # [win]
+    - m2-patch             # [win]
+    - patch                # [not win]
+    - cmake-no-system      # [win]
 
 test:
   commands:
