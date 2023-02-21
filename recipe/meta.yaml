@@ -12,6 +12,7 @@ source:
     # the tty test fails because of the build machine setup, skip it
     - disable_tty_test.patch  # [ppc64le]
     - 0001-Skip-the-single-bit-that-fails-in-test-fs-copyfile-w.patch
+    - fsevent_loose_timeout.patch
 
 build:
   number: 0
