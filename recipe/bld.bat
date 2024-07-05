@@ -1,9 +1,10 @@
 mkdir -p build
 pushd build
-  cmake -G"%CMAKE_GENERATOR%" ^
-        -DBUILD_TESTING=ON ^
-        -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+  cmake -LAH -G Ninja -S . -B build ^
         -DCMAKE_BUILD_TYPE=Release ^
+        -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+        -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
+        -DBUILD_TESTING=ON
         ..
   cmake --build . --target build
 popd
