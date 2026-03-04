@@ -1,5 +1,5 @@
 {% set name = "libuv" %}
-{% set version = "1.48.0" %}
+{% set version = "1.52.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 8c253adb0f800926a6cbd1c6576abae0bc8eb86a4f891049b72f9e5b7dc58f33
+  sha256: eee139c05f7c868f5ae7a54b1e155fd5b6ed13a22329958d2ba711faad016353
   patches:
     - 0001-Skip-the-single-bit-that-fails-in-test-fs-copyfile-w.patch
 
@@ -19,13 +19,12 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - automake             # [unix]
     - autoconf             # [unix]
     - libtool              # [unix]
     - make                 # [unix]
     - sed                  # [unix]
-    - patch                # [unix]
-    - m2-patch             # [win]
     - cmake-no-system      # [win]
     - ninja-base           # [win]
 
@@ -44,7 +43,7 @@ test:
     - if not exist %LIBRARY_LIB%\pkgconfig/libuv.pc (exit 1)         # [win]
 
 about:
-  home: https://libuv.org/
+  home: https://libuv.org
   license: MIT
   license_family: MIT
   license_file: LICENSE
@@ -53,7 +52,7 @@ about:
     libuv is a multi-platform support library with a focus on asynchronous I/O.
     It was primarily developed for use by Node.js, but it's also used by Luvit,
     Julia, pyuv, and others.
-  doc_url: https://docs.libuv.org/
+  doc_url: https://docs.libuv.org
   dev_url: https://github.com/libuv/libuv
 
 extra:
