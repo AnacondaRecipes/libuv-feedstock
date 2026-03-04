@@ -44,7 +44,7 @@ test:
     - if not exist %LIBRARY_LIB%\pkgconfig/libuv.pc (exit 1)         # [win]
 
 about:
-  home: https://libuv.org/
+  home: https://libuv.org
   license: MIT
   license_family: MIT
   license_file: LICENSE
@@ -53,7 +53,7 @@ about:
     libuv is a multi-platform support library with a focus on asynchronous I/O.
     It was primarily developed for use by Node.js, but it's also used by Luvit,
     Julia, pyuv, and others.
-  doc_url: https://docs.libuv.org/
+  doc_url: https://docs.libuv.org
   dev_url: https://github.com/libuv/libuv
 
 extra:
