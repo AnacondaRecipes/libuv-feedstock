@@ -18,8 +18,8 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
     - {{ stdlib('c') }}
+    - {{ compiler('c') }}
     - automake  # [unix]
     - autoconf  # [unix]
     - libtool  # [unix]
