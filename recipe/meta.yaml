@@ -12,20 +12,19 @@ source:
     - 0001-Skip-the-single-bit-that-fails-in-test-fs-copyfile-w.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage('libuv', max_pin='x') }}
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - automake             # [unix]
     - autoconf             # [unix]
     - libtool              # [unix]
     - make                 # [unix]
     - sed                  # [unix]
-    - patch                # [unix]
-    - m2-patch             # [win]
     - cmake-no-system      # [win]
     - ninja-base           # [win]
 
